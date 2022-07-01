@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
-// import { grey, deepOrange, amber } from '@mui/material/colors';
+import "./App.css";
 import SearchAppBar from "./components/SearchAppBar";
 import AppPagination from "./components/AppPagination";
 import { jobs } from "./data";
