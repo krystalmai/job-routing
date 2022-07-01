@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./App.css";
 import Paper from "@mui/material/Paper";
 // import { grey, deepOrange, amber } from '@mui/material/colors';
 import SearchAppBar from "./components/SearchAppBar";
