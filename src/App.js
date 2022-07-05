@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
+import "./App.css";
 import SearchAppBar from "./components/SearchAppBar";
 import AppPagination from "./components/AppPagination";
 import axios from "axios";
