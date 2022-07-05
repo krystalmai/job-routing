@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState}  from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -8,6 +8,7 @@ import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import LogoutIcon from '@mui/icons-material/Logout';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
@@ -53,7 +54,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function ButtonAppBar() {
+export default function SearchAppBar({isSignedIn}) {
+  
   return (
     <Box>
       <AppBar position="static">
@@ -77,11 +79,21 @@ export default function ButtonAppBar() {
               />
             </Search>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: 'flex-end' }}>
-            <LoginOutlinedIcon sx={{display:{xs:'none', md:'block'}}}></LoginOutlinedIcon>
-            <Button color="inherit" sx={{ display: { xs: 'none', md: 'block' } }}>Sign in</Button>
-            <MoreVertIcon sx={{ display: { xs: 'block', sm: 'none' } }} />
-            
+            <Box sx={{ display: "flex", justifyContent: 'flex-end' }}>
+              
+              {isSignedIn ?
+              
+                (<><LogoutIcon sx={{ display: { xs: 'none', md: 'block' } }}></LogoutIcon>
+                <Button color="inherit" sx={{ display: { xs: 'none', md: 'block' } }}>Sign out</Button></>)
+              :
+                (<> <LoginOutlinedIcon sx={{ display: { xs: 'none', md: 'block' } }}></LoginOutlinedIcon>
+                <Button color="inherit" sx={{ display: { xs: 'none', md: 'block' } }}>Sign in</Button>
+                </>
+                )
+              }
+              
+              <MoreVertIcon sx={{ display: { xs: 'block', sm: 'none' } }} />
+              
             </Box>
             </Box>
         </Toolbar>
