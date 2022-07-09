@@ -5,11 +5,9 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
-import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
-import LogoutIcon from '@mui/icons-material/Logout';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import SignInGroup from "./SignInGroup";
+
 
 
 const Search = styled("div")(({ theme }) => ({
@@ -54,7 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar({isSignedIn}) {
+export default function SearchAppBar({isSignedIn, handleOpen}) {
   
   return (
     <Box>
@@ -79,23 +77,8 @@ export default function SearchAppBar({isSignedIn}) {
               />
             </Search>
           </Box>
-            <Box sx={{ display: "flex", justifyContent: 'flex-end' }}>
-              
-              {isSignedIn ?
-              
-                (<><LogoutIcon sx={{ display: { xs: 'none', md: 'block' } }}></LogoutIcon>
-                <Button color="inherit" sx={{ display: { xs: 'none', md: 'block' } }}>Sign out</Button></>)
-              :
-                (<> <LoginOutlinedIcon sx={{ display: { xs: 'none', md: 'block' } }}></LoginOutlinedIcon>
-                <Button color="inherit" sx={{ display: { xs: 'none', md: 'block' } }}>Sign in</Button>
-                </>
-                )
-              }
-              
-              <MoreVertIcon sx={{ display: { xs: 'block', sm: 'none' } }} />
-              
-            </Box>
-            </Box>
+            <SignInGroup isSignedIn={isSignedIn} handleOpen={handleOpen} />
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

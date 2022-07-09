@@ -10,7 +10,7 @@ const FTextField = ({ name, ...other }) => {
         <TextField
           {...field}
           fullWidth
-          onError={(!!error)}
+          error={(!!error)}
           helperText={error?.message}
           {...other}
         />
