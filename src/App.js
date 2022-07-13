@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 import SearchAppBar from "./components/SearchAppBar";
-import AppPagination from "./components/AppPagination";
-import apiService from "./app/apiService";
 import JobCardGrid from "./components/JobCardGrid";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Box, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 import LogInForm from "./components/LogInForm";
-import { BASE_URL } from "./app/config";
+import { AuthProvider } from "./helpers/Context";
+import { Outlet, Route, Routes, useLocation } from "react-router-dom";
+import JobDetails from "./components/JobCardGrid/JobDetails";
+import RequireAuth from "./helpers/RequireAuth";
 
 const darkTheme = createTheme({
   palette: {
@@ -16,60 +17,49 @@ const darkTheme = createTheme({
 });
 
 function App() {
-  const [jobs, setJobs] = useState(null);
-  const [jobsArr, setJobsArr] = useState(null);
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  
-  useEffect(() => {
-    const getJobs = async () => {
-      try {
-        let jobs = await apiService.get("/jobs");
-        setJobs(jobs.data);
-        setJobsArr(jobs.data.slice(0, 5));
-        
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getJobs();
-  }, []);
-   
-  console.log(jobs);
-  console.log(jobsArr);
-  const pageSize = 5;
-
-  const handleChange = (event, page) => {
-    let from = (page - 1) * pageSize;
-    let to = (page - 1) * pageSize + pageSize;
-    setJobsArr(jobs.slice(from, to));
-  };
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  let location = useLocation();
+  let state = location.state;
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <div className="App">
-        <Paper sx={{ pb: 10, m: 0 }}>
-          <SearchAppBar isSignedIn={isSignedIn} handleOpen={handleOpen} />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <JobCardGrid jobsArr={jobsArr} />
-            <AppPagination
-              handleChange={handleChange}
-              count={Math.ceil(jobs.length / pageSize)}
-            />
-          </Box>
-          <LogInForm open={open} handleClose={handleClose} />
-        </Paper>
-      </div>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={darkTheme}>
+        <div className="App">
+          <Paper sx={{ height: { md: "100vh" }, pb: 10, m: 0 }}>
+            <SearchAppBar />
+
+            <Routes location={state?.backgroundLocation || location}>
+              <Route path="/" element={<JobCardGrid />}>
+                <Route path="/login" element={<LogInForm />} />
+                <Route
+                  path="/jobs/:jobId"
+                  element={
+                    <RequireAuth>
+                      <JobDetails />
+                    </RequireAuth>
+                  }
+                />
+              </Route>
+            </Routes>
+
+            {state?.backgroundLocation && (
+              <Routes>
+                <Route path="/login" element={<LogInForm />} />
+                <Route
+                  path="/jobs/:jobId"
+                  element={
+                    <RequireAuth>
+                      <JobDetails />
+                    </RequireAuth>
+                  }
+                />
+              </Routes>
+            )}
+
+            <Outlet />
+          </Paper>
+        </div>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 

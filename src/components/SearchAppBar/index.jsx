@@ -77,7 +77,7 @@ export default function SearchAppBar({isSignedIn, handleOpen}) {
               />
             </Search>
           </Box>
-            <SignInGroup isSignedIn={isSignedIn} handleOpen={handleOpen} />
+            <SignInGroup handleOpen={handleOpen} />
           </Box>
         </Toolbar>
       </AppBar>
