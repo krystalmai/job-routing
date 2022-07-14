@@ -13,5 +13,5 @@ A authentication provider API was simulated
    - If users have signed in, see the username and a sign out button instead
 * Users can see the list of jobs on the main page
 * Users can click on a single job card to pop up a detailed job modal
-  -If the user haven’t signed in, pop up a sign in modal
-  -Users can sign in with a provided username and password or any username and password input by user (wwithout having to sign up) and sign out. Then the application will navigate the user to the expected page.
+  - If the user haven’t signed in, pop up a sign in modal
+  - Users can sign in with a provided username and password or any username and password input by user (wwithout having to sign up) and sign out. Then the application will navigate the user to the expected page.
