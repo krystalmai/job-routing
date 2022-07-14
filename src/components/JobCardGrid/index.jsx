@@ -7,28 +7,21 @@ import AppPagination from "./AppPagination";
 import JobCard from "./JobCard";
 
 function JobCardGrid() {
-  
   const [jobs, setJobs] = useState(null);
   const [jobsArr, setJobsArr] = useState(null);
   const pageSize = 9;
- 
-
-  
 
   useEffect(() => {
-    async function processJobsData () {
-      let jobs = await getJobs();
-      setJobs(jobs);
-      setJobsArr(jobs.slice(0,pageSize))
-
+    async function processJobsData() {
+      if (!jobs) {
+        let jobs = await getJobs();
+        setJobs(jobs);
+        setJobsArr(jobs.slice(0, pageSize));
+      }
     }
-    
-    processJobsData();
-    
-  }, []);
-  
- 
 
+    processJobsData();
+  }, [jobs]);
 
   const handleChange = (event, page) => {
     let from = (page - 1) * pageSize;
@@ -36,14 +29,12 @@ function JobCardGrid() {
     setJobsArr(jobs.slice(from, to));
   };
   return (
-   
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
       }}
-      
     >
       {jobs && jobsArr ? (
         <>
@@ -86,9 +77,8 @@ function JobCardGrid() {
         />
       )}
 
-      <Outlet/>
-      </Box>
-    
+      <Outlet />
+    </Box>
   );
 }
 

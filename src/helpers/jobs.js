@@ -13,3 +13,6 @@ export const getJobs = async () => {
   }
 };
 
+export const searchJob = (jobsArr, string) => {
+  return jobsArr.find((job) => job.title.includes(string.toLowerCase().trim()))
+}

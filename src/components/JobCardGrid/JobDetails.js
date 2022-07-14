@@ -37,12 +37,14 @@ function JobDetails() {
  
 
   useEffect(() => {
+  
+
     getJobs().then((jobs) => {
       
       setJob(getJobById(jobs, jobId));
       
     });
-  }, []);
+  }, [jobId]);
 
   if (!job) {
     return null;

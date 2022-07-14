@@ -51,7 +51,8 @@ export default function JobCard({ job }) {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          pt: 0,
+          pt:0,
+          pb: 1.5,
         }}
       >
         <Link

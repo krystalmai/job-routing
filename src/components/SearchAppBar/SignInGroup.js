@@ -20,7 +20,7 @@ export default function SignInGroup() {
         alignItems: "center",
       }}
     >
-      <Box sx={{ display: { xs: "none", sm: "none", md: "flex" } }}>
+      <Box sx={{ display: { xs: "none", sm: "none", md: "flex" }, alignItems: "center" }}>
         {auth.user ? (
           <>
             <Avatar sx={{ bgcolor: "white", width: 30, height: 30, mr: 1 }}>
