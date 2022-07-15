@@ -6,6 +6,7 @@ A fake API was created using json-server to access local database
 
 A authentication provider API was simulated 
 
+! Needs to buil search function
 
 ## User Story
 * Users can see the navigation bar that shows user status
